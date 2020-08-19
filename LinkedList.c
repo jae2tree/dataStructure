@@ -85,20 +85,59 @@ int getLinkedListLength(LinkedList* pList) {
     }
     return 0;
 }
+
+void iterateLinkedList(LinkedList* pList) {
+    int count = 0;
+    LinkedListNode* pNode = NULL;
+
+    pNode = pList->headerNode.pLink;
+    while(pNode != NULL) {
+        printf("[%d],%d\n", count, pNode->data);
+        count++;
+        pNode = pNode->pLink;
+    }
+    printf("노드 개수: %d\n", count);
+}
+
+void concatLinkedList(LinkedList* pListA, LinkedList* pListB) {
+    LinkedListNode* pNodeA = NULL;
+    if (pListA != NULL && pListB != NULL) {
+        pNodeA = pListA->headerNode.pLink;
+        if(pNodeA != NULL) {
+            while(pNodeA->pLink != NULL) {
+                pNodeA = pNodeA->pLink;
+            }
+        }
+        
+        pNodeA->pLink = pListB->headerNode.pLink;
+        pListB->headerNode.pLink = NULL;
+    }
+}
+
 int main(){
-    LinkedList *pList = NULL;
+    LinkedList *pListA = NULL;
+    LinkedList *pListB = NULL;
     int value = 0;
 
-    pList = createList();
-    addLinkedListData(pList, 0, 10);
-    addLinkedListData(pList, 1, 20);
-    addLinkedListData(pList, 2, 30);
+    pListA = createList();
+    pListB = createList();
+    addLinkedListData(pListA, 0, 10);
+    addLinkedListData(pListA, 1, 20);
+    addLinkedListData(pListA, 2, 30);
+    addLinkedListData(pListB, 0, 40);
+    addLinkedListData(pListB, 1, 50);
+    addLinkedListData(pListB, 2, 60);
 
-    value = getLinkedListData(pList, 0);
-    printf("위치: %d, 값: %d\n", 0, value);
+    iterateLinkedList(pListA);
+    iterateLinkedList(pListB);
 
-    removeLinkedListData(pList, 0);
-    deleteLinkedList(pList);
-    
+    concatLinkedList(pListA, pListB);
+
+    removeLinkedListData(pListA, 0);
+    iterateLinkedList(pListA);
+
+    deleteLinkedList(pListA);
+    deleteLinkedList(pListB);
+
     return 0;
 }
