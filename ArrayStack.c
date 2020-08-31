@@ -78,6 +78,10 @@ ArrayStackNode* popAS(ArrayStack* pStack)
         printf("pStack->pData 주소: %p\n", pStack->pData);
         printf("(pStack->pData) 주소: %p\n", &(pStack->pData));
         printf("pStack->pData[0] 주소: %p\n", pStack->pData[0]);
+        printf("pStack->pData[1] 주소: %p\n", pStack->pData[1]);
+        printf("pStack->pData[2] 주소: %p\n", pStack->pData[2]);
+        printf("pStack->pData[3] 주소: %p\n", pStack->pData[3]);
+        printf("pStack->pData[4] 주소: %p\n", pStack->pData[4]);
         printf("pStack->pData[5] 주소: %p\n", pStack->pData[5]);
         printf("pStack->pData[5] data 값: %c\n", pStack->pData[5].data);
         if(pReturn != NULL) {
@@ -117,6 +121,7 @@ void deleteArrayStack(ArrayStack* pStack)
 
 void displayArrayStack(ArrayStack *pStack)
 {
+    printf("------------------------------\n");
     int i = 0;
     if(pStack != NULL) {
         int size = pStack->maxCount;
@@ -134,6 +139,7 @@ void displayArrayStack(ArrayStack *pStack)
             printf("[%d]-[%c]\n",
                     i, pStack->pData[i].data);
         }
+        printf("\n");
     }
 }
 
@@ -148,6 +154,8 @@ int main(int argc, char * argv[])
         pushAS(pStack, 'B');
         pushAS(pStack, 'C');
         pushAS(pStack, 'D');
+        pushAS(pStack, 'E');
+        pushAS(pStack, 'F');
         displayArrayStack(pStack);
 
         pNode = popAS(pStack);
@@ -155,13 +163,13 @@ int main(int argc, char * argv[])
         if(pNode != NULL) {
             printf("Pop 값-[%c]\n", pNode->data);
             printf("pNode 주소: %p\n", pNode);
-            //free(pNode);
+            free(pNode);
         }
         pNode = popAS(pStack);
         
         if(pNode != NULL) {
             printf("Pop 값-[%c]\n", pNode->data);
-            //free(pNode);
+            free(pNode);
         }
         
 
